@@ -29,6 +29,9 @@
     <div class="loginBtn">
       <authBtn text="登陆" @send="sendLogin"></authBtn>
     </div>
+     <div class="register">
+            还没有账号?  <router-link to="/register">立即注册</router-link> 
+        </div>
   </div>
 </template>
 
@@ -95,4 +98,8 @@ export default {
     color: #d81e06;
   }
 }
+.register {
+  text-align: center;
+  margin-top: 6.667vw;
+  }
 </style>

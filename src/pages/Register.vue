@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <div class="closeBtn">
-      <span class="iconfont iconicon-test"></span>
+      <span class="iconfont iconicon-test" @click="$router.back('login')"></span>
     </div>
     <div class="logo">
       <span class="iconfont iconnew"></span>
@@ -19,7 +19,7 @@
     <div class="nickName">
       <authInput
         type="text"
-        placeholder="请输入昵称"
+        placeholder="昵称"
         rule="^\w{4,16}$"
         err_message="请输入正确昵称"
         @input="setNickName"
@@ -29,7 +29,7 @@
     <div class="userPwd">
       <authInput
         type="password"
-        placeholder="请输入密码"
+        placeholder="密码"
         rule="^\d{3,16}$"
         err_message="请输入正确密码"
         @input="setUserPwd"
@@ -90,14 +90,13 @@ export default {
 <style lang="less" scoped>
 .container {
   padding: 0 5.556vw;
-}
-.closeBtn {
-  padding-top: 20px;
-  .iconfont {
-    font-size: 7.5vw;
+  .closeBtn {
+    padding-top: 20px;
+    .iconfont {
+      font-size: 7.5vw;
+    }
   }
 }
-
 .logo {
   display: flex;
   justify-content: center;
