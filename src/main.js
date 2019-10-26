@@ -5,16 +5,29 @@ import App from './App'
 import router from './router'
 // ajax请求: axios库
 import axios from "axios";
-import 'vant/lib/index.css';
+
 //引入组件库
-import Vant from 'vant';
-//注册组件库
+import {Toast} from 'vant';
+
 Vue.config.productionTip = false
-Vue.use(Vant);
 Vue.prototype.$axios = axios;
-axios.defaults.baseURL = "http://localhost:3000"
-//引入组件样式文件
+// 基准路径
+axios.defaults.baseURL = "http://127.0.0.1:3000"
+
 /* eslint-disable no-new */
+// axios 拦截器
+axios.interceptors.response.use((res)=>{
+  const {message,statuCode} = res.data;
+  if(message && statuCode == 401) {
+    Toast.fall(message)
+  }
+  return(res)
+})
+//注册组件库
+import Vant from 'vant';
+Vue.use(Vant);
+//引入组件样式文件
+import 'vant/lib/index.css';
 new Vue({
   el: '#app',
   router,
