@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="closeBtn">
-      <span class="iconfont iconicon-test" @click="$router.back('login')"></span>
+      <span class="iconfont iconicon-test" @click="$router.back('/login')"></span>
     </div>
     <div class="logo">
       <span class="iconfont iconnew"></span>
@@ -36,8 +36,8 @@
       ></authInput>
     </div>
     <div class="btn">
-            <authBtn text="注册" @send="sendRegister"/>
-        </div>
+      <authBtn text="注册" @send="sendRegister" />
+    </div>
   </div>
 </template>
 
@@ -51,37 +51,35 @@ export default {
   },
   data() {
     return {
-      username: '',
-      password: '',
-      nickname: ''
-    }
+      username: "",
+      password: "",
+      nickname: ""
+    };
   },
   methods: {
     setUserName(name) {
-      this.username = name
+      this.username = name;
     },
-    setNickName(nickname){
-      this.nickname = nickname
+    setNickName(nickname) {
+      this.nickname = nickname;
     },
-    setUserPwd(password){
-      this.password = password
+    setUserPwd(password) {
+      this.password = password;
     },
-    sendRegister(){
+    sendRegister() {
       this.$axios({
-        url: 'http://127.0.0.1:3000/register',
-        method: 'post',
+        url: "/register",
+        method: "post",
         data: {
           username: this.username,
           password: this.password,
           nickname: this.nickname
         }
-      }).then( res => {
-        if(res.data.statusCode && res.data.statusCode == 400){
-          this.$toast.fail(res.data.message)
-        }else {
-          this.$toast.success(res.data.message)
+      }).then(res => {
+        if (!res.data.statusCode) {
+          this.$toast.success(res.data.message);
         }
-      })
+      });
     }
   }
 };
