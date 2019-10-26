@@ -15,7 +15,7 @@ export default {
   props: ['label','desc'],
   methods: {
     jumPage(){
-      console.log(this.label);
+      // console.log(this.label);
       
       this.$emit('jump', this.label)
     }

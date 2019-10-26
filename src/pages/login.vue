@@ -72,12 +72,12 @@ export default {
         if (!res.data.statusCode) {
           // 保存登陆成功返回来的数据
           localStorage.setItem('token',res.data.data.token);
-          localStorage.setItem('user_id',res.data.data.userid)
+          localStorage.setItem('user_id',res.data.data.user.id)
 
           // 提示登陆成功
           this.$toast.success(res.data.message);
           setTimeout(() => {
-            this.$ruter.push({
+            this.$router.push({
               name: "profilePage"
             })
           }, 1000);

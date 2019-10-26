@@ -2,11 +2,13 @@
   <div>
     <div class="profile">
       <div class="infot-left">
-        <img class="avatar" src="@/assets/images/timg.jpg" />
+        <img v-if="!profile.head_img" class="avatar" src="@/assets/images/timg.jpg" alt="">
+        <img v-else class="avatar" :src="'http://127.0.0.1:3000'+profile.head_img" />
         <div class="profile-middle">
           <div class="name">
-            <span class="iconfont iconxingbienan"></span>
-            火星网友
+            <span v-if="profile.gender == 1" class="iconfont iconxingbienan"></span>
+            <span v-else class="iconfont iconxingbienv"></span>
+            {{profile.nickname}}
           </div>
           <div class="time">2019-10-10</div>
         </div>
@@ -23,14 +25,36 @@
 <script>
 import cellBar from "@/components/cellBar";
 export default {
+  data() {
+    return {
+      profile: {}
+    };
+  },
   components: {
     cellBar
   },
   methods: {
-     jumpToPage(label) {
-            console.log('跳转到'+label+'页面');
-        }
-  }
+    jumpToPage(label) {
+      console.log("跳转到" + label + "页面");
+    }
+  },
+  mounted() {
+    this.$axios({
+      url: "/user/" + localStorage.getItem("user_id"),
+      methods: "get",
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    }).then(res => {
+      // console.log(res);
+
+      this.profile = res.data.data;
+      // this.profile.head_img === ""
+      //   ? (this.profile.head_img = "@/assets/images/timg.jpg")
+      //   : this.profile;
+      console.log(this.profile);
+    });
+    }
 };
 </script>
 
