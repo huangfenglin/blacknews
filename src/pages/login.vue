@@ -29,15 +29,16 @@
     <div class="loginBtn">
       <authBtn text="登陆" @send="sendLogin"></authBtn>
     </div>
-     <div class="register">
-            还没有账号?  <router-link to="/register">立即注册</router-link> 
-        </div>
+    <div class="register">
+      还没有账号?
+      <router-link to="/register">立即注册</router-link>
+    </div>
   </div>
 </template>
 
 <script>
-import authInput from "../components/authInput";
-import authBtn from "../components/authBtn"
+import authInput from "@/components/authInput";
+import authBtn from "@/components/authBtn";
 export default {
   components: {
     authInput,
@@ -56,25 +57,32 @@ export default {
     setUserPwd(password) {
       this.userPwd = password;
     },
-    sendLogin(){
-      
+    sendLogin() {
       // 发送ajax请求
       this.$axios({
-        url: 'http://127.0.0.1:3000/login',
-        method: 'post',
+        url: "/login",
+        method: "post",
         data: {
-           username: this.userName,
-           password: this.userPwd
+          username: this.userName,
+          password: this.userPwd
         }
-      }).then(res=>{
-        console.log(res);
-        console.log(res.data);
-        if(res.data.statusCode && res.data.statusCode == 401){
-          this.$toast.fail(res.data.message)
-        }else {
-          this.$toast.success(res.data.message)
+      }).then(res => {
+        // console.log(res);
+        
+        if (!res.data.statusCode) {
+          // 保存登陆成功返回来的数据
+          localStorage.setItem('token',res.data.data.token);
+          localStorage.setItem('user_id',res.data.data.userid)
+
+          // 提示登陆成功
+          this.$toast.success(res.data.message);
+          setTimeout(() => {
+            this.$ruter.push({
+              name: "profilePage"
+            })
+          }, 1000);
         }
-      })
+      });
     }
   }
 };
@@ -101,5 +109,5 @@ export default {
 .register {
   text-align: center;
   margin-top: 6.667vw;
-  }
+}
 </style>
