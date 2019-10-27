@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="profile">
+    <div class="profile" @click="editProfile">
       <div class="infot-left">
-        <img v-if="!profile.head_img" class="avatar" src="@/assets/images/timg.jpg" alt="">
+        <img v-if="!profile.head_img" class="avatar" src="@/assets/images/timg.jpg" alt />
         <img v-else class="avatar" :src="'http://127.0.0.1:3000'+profile.head_img" />
         <div class="profile-middle">
           <div class="name">
@@ -18,7 +18,8 @@
     <cellBar label="我的关注" desc="关注的用户" @jump="jumpToPage" />
     <cellBar label="我的跟帖" desc="跟帖/回复" @jump="jumpToPage" />
     <cellBar label="我的收藏" desc="文章/视频" @jump="jumpToPage" />
-    <cellBar label="设置" @jump="jumpToPage" />
+    <cellBar label="设置" @jump="editProfile" />
+    <cellBar label="退出登录" @jump="logout" />
   </div>
 </template>
 
@@ -36,8 +37,25 @@ export default {
   methods: {
     jumpToPage(label) {
       console.log("跳转到" + label + "页面");
+    },
+    // 退出登录
+    logout() {
+      //  清除token
+      localStorage.removeItem("token");
+      localStorage.removeItem("user_id");
+      // 跳转到登录页
+      this.$router.replace({
+        path: "/login"
+      });
+    },
+    //  跳转编辑页
+    editProfile() {
+      this.$router.push({
+        name: "editProfilePage"
+      });
     }
   },
+  // 渲染个人中心页面
   mounted() {
     this.$axios({
       url: "/user/" + localStorage.getItem("user_id"),
@@ -52,9 +70,9 @@ export default {
       // this.profile.head_img === ""
       //   ? (this.profile.head_img = "@/assets/images/timg.jpg")
       //   : this.profile;
-      console.log(this.profile);
+      // console.log(this.profile);
     });
-    }
+  }
 };
 </script>
 
