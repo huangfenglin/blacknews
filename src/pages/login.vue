@@ -78,7 +78,7 @@ export default {
           this.$toast.success(res.data.message);
           setTimeout(() => {
             this.$router.push({
-              name: "profilePage"
+              name: "homePage"
             })
           }, 1000);
         }
