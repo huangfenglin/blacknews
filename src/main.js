@@ -5,10 +5,18 @@ import App from './App'
 import router from './router'
 // ajax请求: axios库
 import axios from "axios";
-
-//引入组件库
+// 引入输入框功能
+import { Field } from 'vant';
+Vue.use(Field);
+// 引入弹出框功能
+import { Dialog } from 'vant';
+Vue.use(Dialog);
+//引入提示框
 import {Toast} from 'vant';
 Vue.use(Toast)
+// 上拉框组件内
+import { ActionSheet } from 'vant';
+Vue.use(ActionSheet);
 Vue.config.productionTip = false
 
 // 绑定到原型上,所以vue实例都可以调用axios
