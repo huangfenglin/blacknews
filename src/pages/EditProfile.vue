@@ -3,6 +3,7 @@
     <headerMiddle @previousPage="$router.back('/profile')" title="编辑资料" />
     <div class="avatar">
       <img class="avatar-img" :src="profile.head_img" alt />
+      <van-uploader :after-read="afterRead" class="fileUploader" />
     </div>
     <cell-bar label="昵称" :desc="profile.nickname" @jump="isShowNickname=true" />
     <cell-bar label="密码" desc="******" @jump="isShowPwd=true" />
@@ -73,9 +74,9 @@ export default {
       this.$axios({
         url: /user/ + localStorage.getItem("user_id"),
         method: "get",
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
+        // headers: {
+        //   Authorization: localStorage.getItem("token")
+        // }
       }).then(res => {
         // console.log(res);
         this.profile = res.data.data;
@@ -97,22 +98,53 @@ export default {
       this.$axios({
         url: "/user_update/" + localStorage.getItem("user_id"),
         method: "post",
-        headers: {
-          Authorization: localStorage.getItem("token")
-        },
+        // headers: {
+        //   Authorization: localStorage.getItem("token")
+        // },
         data: newData
       }).then(res => {
         this.loadPage();
       });
     },
+
     // 修改性别
     selectGender(item) {
+      console.log(item);
+      
       this.editProfile({
         gender: item.name == "男" ? 1 : 0
       });
       this.isShowGender = false;
+    },
+
+    //修改头像
+    afterRead(fileItem) {
+      console.log(fileItem);
+      // 转化为二进制
+      const data = new FormData();
+      // 把图片放入这个二进制对象里面
+      data.append("file", fileItem.file);
+      this.$axios({
+        url: "/upload",
+        method: "post",
+        data: data,
+        // headers: {
+        //   Authorization: localStorage.getItem("token")
+        // }
+      }).then(res => {
+        console.log(res.data);
+        // 这里文件上传完毕
+        // 文件上传仅仅是上传了文件并返回了 url
+        // 但是并没有修改用户的信息
+        // 所以我们要调用 editProfile 方法 修改 head_img
+        // 这个时候我们的图片地址在 res.data.data.url
+        this.editProfile({
+          head_img: res.data.data.url
+        });
+      });
     }
   },
+  // 注册组件
   components: {
     cellBar,
     headerMiddle
@@ -127,9 +159,21 @@ export default {
 .avatar {
   padding: 8.333vw;
   text-align: center;
+  position: relative;
 }
 .avatar-img {
   width: 19.444vw;
   border-radius: 50%;
+}
+.fileUploader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
 }
 </style>
