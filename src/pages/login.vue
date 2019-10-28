@@ -8,26 +8,26 @@
     </div>
     <!-- 输入框 -->
     <div class="inputName">
-      <authInput
+      <auth-input
         type="text"
         placeholder="请输入手机号"
         rule="^\d{4,16}$"
         err_message="请输入正确手机号"
         @input="setUserName"
-      ></authInput>
+      ></auth-input>
     </div>
     <!-- 密码框 -->
     <div class="inputPwd">
-      <authInput
+      <auth-input
         type="password"
         placeholder="请输入密码"
         rule="^\d{3,16}$"
         err_message="请输入正确密码"
         @input="setUserPwd"
-      ></authInput>
+      ></auth-input>
     </div>
     <div class="loginBtn">
-      <authBtn text="登陆" @send="sendLogin"></authBtn>
+      <auth-btn text="登陆" @send="sendLogin"></auth-btn>
     </div>
     <div class="register">
       还没有账号?

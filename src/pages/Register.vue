@@ -7,36 +7,36 @@
       <span class="iconfont iconnew"></span>
     </div>
     <div class="userName">
-      <authInput
+      <auth-input
         type="text"
         placeholder="用户名/手机号码"
         rule="^\d{4,16}$"
         err_message="请输入正确的用户名或手机号码"
         @input="setUserName"
-      ></authInput>
+      ></auth-input>
     </div>
 
     <div class="nickName">
-      <authInput
+      <auth-input
         type="text"
         placeholder="昵称"
         rule="^\w{4,16}$"
         err_message="请输入正确昵称"
         @input="setNickName"
-      ></authInput>
+      ></auth-input>
     </div>
 
     <div class="userPwd">
-      <authInput
+      <auth-input
         type="password"
         placeholder="密码"
         rule="^\d{3,16}$"
         err_message="请输入正确密码"
         @input="setUserPwd"
-      ></authInput>
+      ></auth-input>
     </div>
     <div class="btn">
-      <authBtn text="注册" @send="sendRegister" />
+      <auth-btn text="注册" @send="sendRegister" />
     </div>
   </div>
 </template>

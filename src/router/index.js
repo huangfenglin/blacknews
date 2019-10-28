@@ -1,10 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/pages/login.vue'
-import Register from '@/pages/Register.vue'
-import Profile from '@/pages/profile.vue'
-import Home from '@/pages/Home.vue'
-import EditProfile from '@/pages/EditProfile.vue'
+// import Login from '@/pages/login.vue'
+// import Register from '@/pages/Register.vue'
+// import Profile from '@/pages/profile.vue'
+// import Home from '@/pages/Home.vue'
+// import EditProfile from '@/pages/EditProfile.vue'
+
+const Home = () =>import('@/pages/Home.vue')
+const Login = () =>import('@/pages/login.vue')
+const Register = () =>import('@/pages/Register.vue')
+const Profile = () =>import('@/pages/Profile.vue')
+const EditProfile = () =>import('@/pages/EditProfile.vue')
+
+
 Vue.use(Router)
 
 const routes = [

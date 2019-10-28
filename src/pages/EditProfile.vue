@@ -4,9 +4,9 @@
     <div class="avatar">
       <img class="avatar-img" src="@/assets/images/timg.jpg" alt="">
     </div>
-    <cellBar label="昵称" desc="火星网友"/>
-    <cellBar label="密码" desc="******"/>
-    <cellBar label="性别" desc="男"/>
+    <cell-bar label="昵称" desc="火星网友"/>
+    <cell-bar label="密码" desc="******"/>
+    <cell-bar label="性别" desc="男"/>
 
 
   </div>
@@ -28,26 +28,23 @@ export default {
     cellBar,
     headerMiddle
   },
-  // mounted() {
-  //   this.$axios({
-  //     url: "/user_update/",
-  //     methods: "post",
-  //     data: {
-  //       id: localStorage.getItem("user_id")
-  //     },
-  //     headers: {
-  //       Authorization: localStorage.getItem("token")
-  //     }
-  //   }).then(res => {
-  //     console.log(res);
+  mounted() {
+    this.$axios({
+      url: "/user_update/"+ localStorage.getItem("user_id"),
+      method: "post",
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    }).then(res => {
+      console.log(res);
 
-  //     this.profile = res.data.data;
-  //     // this.profile.head_img === ""
-  //     //   ? (this.profile.head_img = "@/assets/images/timg.jpg")
-  //     //   : this.profile;
-  //     console.log(this.profile);
-  //   });
-  // }
+      this.profile = res.data.data;
+      // this.profile.head_img === ""
+      //   ? (this.profile.head_img = "@/assets/images/timg.jpg")
+      //   : this.profile;
+      console.log(this.profile);
+    });
+  }
 }
 </script>
 
