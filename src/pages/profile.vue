@@ -2,8 +2,9 @@
   <div>
     <div class="profile" @click="editProfile">
       <div class="infot-left">
-        <img v-if="!profile.head_img" class="avatar" src="@/assets/images/timg.jpg" alt />
-        <img v-else class="avatar" :src="'http://127.0.0.1:3000'+profile.head_img" />
+        <!-- <img v-if="!profile.head_img" class="avatar" src="@/assets/images/timg.jpg" alt />
+        <img v-else class="avatar" :src="'http://127.0.0.1:3000'+profile.head_img" /> -->
+        <img :src="profile.head_img" class="avatar" alt="">
         <div class="profile-middle">
           <div class="name">
             <span v-if="profile.gender == 1" class="iconfont iconxingbienan"></span>
@@ -15,11 +16,11 @@
       </div>
       <span id="rightjiantou" class="iconfont iconjiantou1"></span>
     </div>
-    <cellBar label="我的关注" desc="关注的用户" @jump="jumpToPage" />
-    <cellBar label="我的跟帖" desc="跟帖/回复" @jump="jumpToPage" />
-    <cellBar label="我的收藏" desc="文章/视频" @jump="jumpToPage" />
-    <cellBar label="设置" @jump="editProfile" />
-    <cellBar label="退出登录" @jump="logout" />
+    <cell-bar label="我的关注" desc="关注的用户" @jump="jumpToPage" />
+    <cell-bar label="我的跟帖" desc="跟帖/回复" @jump="jumpToPage" />
+    <cell-bar label="我的收藏" desc="文章/视频" @jump="jumpToPage" />
+    <cell-bar label="设置" @jump="editProfile" />
+    <cell-bar label="退出登录" @jump="logout" />
   </div>
 </template>
 
@@ -67,10 +68,10 @@ export default {
       // console.log(res);
 
       this.profile = res.data.data;
-      // this.profile.head_img === ""
-      //   ? (this.profile.head_img = "@/assets/images/timg.jpg")
-      //   : this.profile;
-      // console.log(this.profile);
+      this.profile.head_img === ""
+        ? (this.profile.head_img = "/static/images/timg.jpg")
+        : this.profile.head_img=this.$axios.defaults.baseURL+this.profile.head_img;
+      console.log(this.profile);
     });
   }
 };
