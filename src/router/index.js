@@ -69,8 +69,13 @@ const router = new Router({
 // 全局导航守卫
 router.beforeEach((to, from, next) => {
   document.title = to.matched[0].meta.title
-  const token = localStorage.getItem("token");
-  if (to.path === '/profile') {
+
+  const token = localStorage.getItem("token"); 
+  const pagesNeedAuth = [
+    '/profile',
+    '/editprofile'
+  ]
+  if (pagesNeedAuth.indexOf(to.path) >= 0) {
     token? next():next('/login')
   } else {
     next()
