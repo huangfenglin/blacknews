@@ -2,7 +2,16 @@
   <div>
     <homeHeader></homeHeader>
     <van-tabs v-model="activeTab">
-      <van-tab v-for="(tabItem,index) in tabList" :key="index" :title="tabItem.name">内容 {{tabItem.name}}</van-tab>
+      <van-tab
+        v-for="(tabItem,index) in tabList"
+        :key="index"
+        :title="tabItem.name"
+      >
+
+      <div v-for="(post,index) in tabItem.posts" :key="index">
+        {{post.title}}
+      </div>
+      </van-tab>
     </van-tabs>
   </div>
 </template>
@@ -13,21 +22,59 @@ export default {
   components: {
     homeHeader
   },
-  data(){
+  data() {
     return {
       tabList: [],
-      activeTab: 2
+      // activeTab控制当前显示选项
+      // 如果有登陆的话,第一个分类是关注,头条的 index == 1
+      // 如果没登录第一个分类就是头条,它的 index == 0
+      // 获取 token 就可以判断有没有登陆,设置一个默认激活的当前分类
+      activeTab: localStorage.getItem("token") ? 1 : 0
+    };
+  },
+  methods: {
+    initTabList() {
+      // 挂载完毕的钩子函数
+      this.$axios({
+        url: "/category",
+        method: "get"
+      }).then(res => {
+        // es6 写法
+        const { data } = res.data;
+        console.log(data);
+        // 给每个分类对象添加数组存放文章列表
+        data.forEach(e=>{
+          e.posts = []
+        });
+        // 将获取的数据放到我们的data 当中
+        this.tabList = data;
+        // 获取完了 tab 数据, 马上使用默认 tab (头条) 获取文章列表数据
+        this.getTabPosts(this.activeTab)
+      });
+    },
+    getTabPosts(tabIndex){
+      
+      // 通过传入的标签索引获取到对应的文章列表的栏目id
+      const categoryId = this.tabList[tabIndex]
+      // 发送ajax请求获取文章列表数据
+      this.$axios({
+        url: '/post',
+        method: 'get',
+        params: {
+          category: categoryId
+        }
+      }).then(res=>{
+        // console.log(res);
+        const {data} = res.data;
+        console.log(data);
+        
+        this.tabList[tabIndex].posts = data
+      })
+      
     }
   },
   mounted() {
-    this.$axios({
-      url:'/category'
-    }).then(res=>{
-      console.log(res);
-      const {data} = res.data
-      this.tabList = data
-      
-    })
+    this.initTabList();
   }
 };
 </script>
