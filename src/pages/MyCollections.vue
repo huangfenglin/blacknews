@@ -12,7 +12,7 @@
           <img :src="item.cover[0].url" alt />
         </div>
       </div>
-
+    <!-- 第二种显示方式 -->
       <div class="multipCover" v-else>
         <div class="title">{{item.title}}</div>
         <div class="cover">
@@ -28,6 +28,7 @@
         </div>
         <div class="info">{{item.user.nickname}} {{item.comments.length}}跟帖</div>
       </div>
+
     </div>
   </div>
 </template>
@@ -78,7 +79,7 @@ export default {
             display: flex;
             flex-direction: column;
             padding: 0 2.778vw 0 0;
-            .infot  {
+            .info  {
                 margin-top: 5.556vw;
                 color: #888;
                 font-size: 14px;
