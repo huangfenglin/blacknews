@@ -11,6 +11,8 @@ const Login = () =>import('@/pages/login.vue')
 const Register = () =>import('@/pages/Register.vue')
 const Profile = () =>import('@/pages/Profile.vue')
 const EditProfile = () =>import('@/pages/EditProfile.vue')
+const MyFollow  = () => import('@/pages/MyFollow.vue')
+const Test = () => import('@/pages/Test.vue')
 
 
 Vue.use(Router)
@@ -58,6 +60,22 @@ const routes = [
     component: EditProfile,
     meta: {
       title: '编辑'
+    }
+  },
+  {
+    path: '/myfollow',
+    name: 'myFollowPage',
+    component: MyFollow,
+    meta: {
+      title: '关注列表'
+    }
+  },
+  {
+    path: '/test',
+    name: 'myTestPage',
+    component: Test,
+    meta: {
+      title: '关注列表'
     }
   }
 ]

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headerMiddle @previousPage="$router.back('/profile')" title="编辑资料" />
+    <headerMiddle @previousPage="$router.back()" title="编辑资料" />
     <div class="avatar">
       <img class="avatar-img" :src="profile.head_img" alt />
       <van-uploader :after-read="afterRead" class="fileUploader" />
