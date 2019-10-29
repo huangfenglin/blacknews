@@ -29,11 +29,8 @@ export default {
       url:'/user_comments',
       method: 'get'
     }).then(res=>{
-      console.log(res.data.data);
+      // console.log(res);
       this.commentList = res.data.data
-      console.log(this.commentList);
-      
-      
     })
   }
 };

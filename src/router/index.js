@@ -14,6 +14,8 @@ const EditProfile = () =>import('@/pages/EditProfile.vue')
 const MyFollow  = () => import('@/pages/MyFollow.vue')
 const Test = () => import('@/pages/Test.vue')
 const MyComments = () => import('@/pages/MyComments.vue')
+const MyCollections = () => import('@/pages/MyCollections.vue')
+
 
 
 
@@ -86,6 +88,14 @@ const routes = [
     component: MyComments,
     meta: {
       title: '我的跟帖'
+    }
+  },
+  {
+    path: '/mycollections',
+    name: 'myComments',
+    component: MyCollections,
+    meta: {
+      title: '我的收藏'
     }
   }
 ]

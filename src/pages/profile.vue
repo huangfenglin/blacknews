@@ -18,7 +18,7 @@
     </div>
     <cell-bar label="我的关注" desc="关注的用户" @jump="$router.push('/myfollow')" />
     <cell-bar label="我的跟帖" desc="跟帖/回复" @jump="$router.push('/mycomments')" />
-    <cell-bar label="我的收藏" desc="文章/视频" @jump="jumpToPage" />
+    <cell-bar label="我的收藏" desc="文章/视频" @jump="$router.push('/mycollections')"/>
     <cell-bar label="设置" @jump="editProfile" />
     <cell-bar label="退出登录" @jump="logout" />
   </div>
