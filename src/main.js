@@ -3,23 +3,25 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Vant from 'vant';
+Vue.use(Vant);
 // ajax请求: axios库
 import axios from "axios";
 // 引入输入框功能
-import { Field } from 'vant';
-Vue.use(Field);
+// import { Field } from 'vant';
+// Vue.use(Field);
 // 引入弹出框功能
-import { Dialog } from 'vant';
-Vue.use(Dialog);
+// import { Dialog } from 'vant';
+// Vue.use(Dialog);
 //引入提示框
 import {Toast} from 'vant';
 Vue.use(Toast)
 // 上拉框组件内
-import { ActionSheet } from 'vant';
-Vue.use(ActionSheet);
-import { Uploader } from 'vant'
-Vue.use(Uploader);
-Vue.config.productionTip = false
+// import { ActionSheet } from 'vant';
+// Vue.use(ActionSheet);
+// import { Uploader } from 'vant'
+// Vue.use(Uploader);
+// Vue.config.productionTip = false
 
 // 绑定到原型上,所以vue实例都可以调用axios
 Vue.prototype.$axios = axios;
@@ -46,8 +48,7 @@ axios.interceptors.response.use((res)=>{
 })
 
 //注册Vant库
-// import Vant from 'vant';
-// Vue.use(Vant);
+
 //引入组件样式文件
 import 'vant/lib/index.css';
 new Vue({
