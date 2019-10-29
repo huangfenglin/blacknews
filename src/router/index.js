@@ -13,6 +13,8 @@ const Profile = () =>import('@/pages/Profile.vue')
 const EditProfile = () =>import('@/pages/EditProfile.vue')
 const MyFollow  = () => import('@/pages/MyFollow.vue')
 const Test = () => import('@/pages/Test.vue')
+const MyComments = () => import('@/pages/MyComments.vue')
+
 
 
 Vue.use(Router)
@@ -75,7 +77,15 @@ const routes = [
     name: 'myTestPage',
     component: Test,
     meta: {
-      title: '关注列表'
+      title: '添加关注'
+    }
+  },
+  {
+    path: '/mycomments',
+    name: 'myComments',
+    component: MyComments,
+    meta: {
+      title: '我的跟帖'
     }
   }
 ]
