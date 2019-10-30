@@ -131,7 +131,6 @@ export default {
       justify-content: center;
       align-items: center;
       .iconfont {
-        height: 55px;
         line-height: 15.278vw;
         width: 15.278vw;
         border-radius: 50%;

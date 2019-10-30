@@ -2,7 +2,7 @@
   <div>
     <headerMiddle title="我的收藏"></headerMiddle>
     <!-- 第一种显示方式 -->
-    <div class="item" v-for="(item,index) in collectiionList" :key="index">
+    <!-- <div class="item" v-for="(item,index) in collectiionList" :key="index">
       <div class="singleCover" v-if="item.cover.length == 1">
         <div class="left">
           <div class="title">{{item.title}}</div>
@@ -11,9 +11,9 @@
         <div class="right">
           <img :src="item.cover[0].url" alt />
         </div>
-      </div>
+      </div> -->
     <!-- 第二种显示方式 -->
-      <div class="multipCover" v-else>
+      <!-- <div class="multipCover" v-else>
         <div class="title">{{item.title}}</div>
         <div class="cover">
           <div class="imgWrapper">
@@ -29,19 +29,22 @@
         <div class="info">{{item.user.nickname}} {{item.comments.length}}跟帖</div>
       </div>
 
-    </div>
+    </div> -->
+    <post :post='item' v-for="(item, index) in collectionList" :key="index"/>
   </div>
 </template>
 
 <script>
 import headerMiddle from "../components/headerMiddle";
+import post from '../components/post'
 export default {
   components: {
-    headerMiddle
+    headerMiddle,
+    post
   },
   data() {
     return {
-      collectiionList: []
+      collectionList: []
     };
   },
   mounted() {
@@ -50,11 +53,12 @@ export default {
       method: "get"
     }).then(res => {
       console.log(res);
-      this.collectiionList = res.data.data;
+      this.collectionList = res.data.data;
 
       //  遍历每一个收藏数据,查看里面是否包含图片,进行相关处理
-      this.collectiionList.forEach(e => {
+      this.collectionList.forEach(e => {
         //   如果有图片继续遍历图片对图片类型进行处理
+        e.comment_length = e.comments.length
         if (e.cover) {
           e.cover.forEach(element => {
             if (element.url.indexOf("http") < 0) {
