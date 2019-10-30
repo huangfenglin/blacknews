@@ -7,11 +7,12 @@
         :key="index"
         :title="tabItem.name"
       >
-
+<!-- 内容部分 -->
       <div v-for="(post,index) in tabItem.posts" :key="index">
         {{post.title}}
       </div>
       </van-tab>
+      
     </van-tabs>
   </div>
 </template>
@@ -41,7 +42,7 @@ export default {
       }).then(res => {
         // es6 写法
         const { data } = res.data;
-        console.log(data);
+        // console.log(data);
         // 给每个分类对象添加数组存放文章列表
         data.forEach(e=>{
           e.posts = []
@@ -52,10 +53,13 @@ export default {
         this.getTabPosts(this.activeTab)
       });
     },
+    // 获取文章分类的方法
     getTabPosts(tabIndex){
       
       // 通过传入的标签索引获取到对应的文章列表的栏目id
-      const categoryId = this.tabList[tabIndex]
+      const categoryId = this.tabList[tabIndex].id
+      // console.log(categoryId);
+      
       // 发送ajax请求获取文章列表数据
       this.$axios({
         url: '/post',
@@ -66,11 +70,21 @@ export default {
       }).then(res=>{
         // console.log(res);
         const {data} = res.data;
-        console.log(data);
+        // console.log(data);
+        console.log(res);
         
         this.tabList[tabIndex].posts = data
+
       })
       
+    }
+  },
+  watch: {
+    activeTab (newActiveTab) {
+      // console.log(newActiveTab);
+      if(this.tabList[newActiveTab].posts.length == 0) {
+        this.getTabPosts(newActiveTab)
+      }
     }
   },
   mounted() {
