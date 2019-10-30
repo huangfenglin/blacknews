@@ -74,9 +74,7 @@ export default {
       }).then(res=>{
         // console.log(res);
         const {data} = res.data;
-        // console.log(data);
-        console.log(res);
-        
+        console.log(data);
         this.tabList[tabIndex].posts = data
 
       })
