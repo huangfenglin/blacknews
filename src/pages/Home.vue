@@ -8,9 +8,10 @@
         :title="tabItem.name"
       >
 <!-- 内容部分 -->
-      <div v-for="(post,index) in tabItem.posts" :key="index">
+      <!-- <div v-for="(post,index) in tabItem.posts" :key="index">
         {{post.title}}
-      </div>
+      </div> -->
+      <post :post="post" v-for="(post,index) in tabItem.posts" :key="index"></post>
       </van-tab>
       
     </van-tabs>
@@ -19,9 +20,12 @@
 
 <script>
 import homeHeader from "../components/homeHeader";
+import post from "../components/post";
+
 export default {
   components: {
-    homeHeader
+    homeHeader,
+    post
   },
   data() {
     return {
