@@ -1,7 +1,7 @@
 <template>
   <div>
     <homeHeader></homeHeader>
-    <van-tabs v-model="activeTab">
+    <van-tabs v-model="activeTab"  sticky swipeable>
       <van-tab
         v-for="(tabItem,index) in tabList"
         :key="index"
