@@ -14,7 +14,7 @@
         {{post.title}}
           </div>-->
           <post :post="post" v-for="(post,index) in tabItem.posts" :key="index"></post>
-        </van-list>
+        </van-list> 
 
 
       </van-tab>
@@ -70,14 +70,14 @@ export default {
 
     // 页面滑到底部的事件
     loadMorePost(){
-      console.log('触发了加载函数')
+      // console.log('触发了加载函数')
       // 拉到文章底部触发函数页码+1,发送ajax请求重新获取数据  
       this.tabList[this.activeTab].currentPage++
       this.getTabPosts(this.activeTab);
 
     },
 
-    // 获取文章分类的方法
+    // 获取文章数据的方法
     getTabPosts(tabIndex) {
       // 通过传入的标签索引获取到对应的文章列表的栏目id
       const categoryId = this.tabList[tabIndex].id;

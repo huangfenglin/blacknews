@@ -15,6 +15,8 @@ const MyFollow  = () => import('@/pages/MyFollow.vue')
 const Test = () => import('@/pages/Test.vue')
 const MyComments = () => import('@/pages/MyComments.vue')
 const MyCollections = () => import('@/pages/MyCollections.vue')
+const PostDetail = () => import('@/pages/PostDetail.vue')
+
 
 
 
@@ -96,6 +98,14 @@ const routes = [
     component: MyCollections,
     meta: {
       title: '我的收藏'
+    }
+  },
+  {
+    path: '/postdetail/:id',
+    name: 'PostDetail',
+    component: PostDetail,
+    meta: {
+      title: '文章列表'
     }
   }
 ]
