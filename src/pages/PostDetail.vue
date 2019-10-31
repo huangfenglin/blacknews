@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <postDetailFooter />
+    <postDetailFooter :post="post"/>
   </div>
 </template>
 

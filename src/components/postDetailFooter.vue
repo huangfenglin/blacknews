@@ -6,7 +6,9 @@
         <div class="commentNumber">1020</div>
         <span class="iconfont iconpinglun-"></span>
       </div>
-      <span class="iconfont iconshoucang"></span>
+      <span class="iconfont iconshoucang" :class="{
+        red: post.has_star
+      }" @click="star"></span>
       <span class="iconfont iconfenxiang"></span>
     </div>
     <!-- 激活后的状态 -->
@@ -19,6 +21,7 @@
 
 <script>
 export default {
+  props: ["post"],
   data() {
     return { isFocus: false };
   },
@@ -29,6 +32,24 @@ export default {
       this.$nextTick(() => {
         this.$refs.commentArea.focus();
       });
+    },
+    star() {
+      this.$axios({
+        url:'/post_star/' + this.post.id,
+        method: 'get'
+      }).then(res=>{
+        const {message} = res.data;
+
+        switch (message) {
+          case "收藏成功":
+            this.post.has_star = true;
+
+            break;
+          case "取消成功":    
+            this.post.has_star = false;  
+            break;
+        }
+      })
     }
   }
 };
@@ -104,5 +125,8 @@ export default {
       font-size: 14px;
     }
   }
+}
+.red {
+  color: red;
 }
 </style>
